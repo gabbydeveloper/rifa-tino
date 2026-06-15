@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+:host ::ng-deep {
+  .p-datatable .p-datatable-tbody > tr {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: #f8fafc;
+    }
+  }
+  
+  .p-card {
+    border-radius: 1rem;
+  }
+}

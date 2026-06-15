@@ -1,0 +1,134 @@
+<div class="tino-page">
+
+  <!-- HEADER -->
+  <section class="hero">
+    <div class="grid">
+      <div class="col">
+        <h1 class="titulo">
+          Él es <span>Tino</span>
+        </h1>
+        <p class="subtitulo">
+          Mi perrito amado ❤️
+        </p>
+      </div>
+      <div class="col">
+        <div class="col-12 lg:col-4">
+          <div class="foto-container">
+            <div class="corazon">
+              <img src="assets/img/tino.png" alt="Tino">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col-12 lg:col-5">
+
+      <!-- Historia -->
+      <div class="info-box">
+        <i class="pi pi-heart-fill"></i>
+
+        <div>
+          <h3>Tiene cáncer y necesita una cirugía urgente</h3>
+
+          <p>
+            El tumor está en su lengua y corre riesgo de asfixiarse.
+          </p>
+        </div>
+      </div>
+
+      <!-- Explicación -->
+      <div class="info-box">
+        <i class="pi pi-ticket"></i>
+
+        <div>
+          <h3>Estamos haciendo una rifa</h3>
+
+          <p>
+            Para cubrir los gastos de su operación.
+          </p>
+        </div>
+      </div>
+
+      <!-- Datos bancarios -->
+      <div class="info-box">
+        <i class="pi pi-wallet"></i>
+
+        <div>
+          <h3>Datos bancarios</h3>
+
+          <p>
+            Banco Pichincha<br>
+            Cuenta de Ahorros<br>
+            Nro: 4188986400<br>
+            Gabriela Zapata
+          </p>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="ticket-form">
+
+        <h2>🎫 Compra de boletos</h2>
+
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+          <!-- cantidad -->
+
+          <div class="field-row">
+            <label>Nro. de boletos:</label>
+
+            <p-inputNumber formControlName="cantidadBoletos" placeholder="1" [showButtons]="true">
+            </p-inputNumber>
+          </div>
+
+          <!-- nombre -->
+
+          <div class="field-row">
+            <label>Nombre completo:</label>
+
+            <input pInputText formControlName="nombre" placeholder="Pepe Andrade">
+          </div>
+
+          <!-- apodo -->
+
+          <div class="field-row">
+            <label>Apodo (opcional):</label>
+
+            <input pInputText formControlName="apodo" placeholder="pepe">
+          </div>
+
+          <!-- correo -->
+
+          <div class="field-row">
+            <label>Correo electrónico:</label>
+
+            <input pInputText formControlName="email" placeholder="pepe@ayudatino.com">
+          </div>
+
+          <!-- whatsapp -->
+
+          <div class="field-row">
+            <label>WhatsApp:</label>
+
+            <input pInputText formControlName="whatsapp" placeholder="0991234567">
+          </div>
+
+          <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
+          </p-button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<p-toast></p-toast>
