@@ -1,12 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RifaService } from '../../core/services/rifa.service';
 
@@ -21,9 +22,10 @@ import { RifaService } from '../../core/services/rifa.service';
     InputTextModule,
     CardModule,
     ToastModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ConfirmDialogModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -31,6 +33,8 @@ export class HomeComponent {
   private fb = inject(FormBuilder);
   private rifaService = inject(RifaService);
   private messageService = inject(MessageService);
+  private confirmationService = inject(ConfirmationService);
+  nrosBoletos = signal("");
 
   isLoading = false;
 
@@ -41,6 +45,34 @@ export class HomeComponent {
     email: ['', [Validators.required, Validators.email]],
     whatsapp: ['', [Validators.required, Validators.pattern(/^[0-9+]{8,15}$/)]]
   });
+
+  premios(event: Event) {
+    let premios = "1. Cocina de inducción, 4 hornillas y horno (valorada en $500) <br>";
+    premios += "2. Traje de danza árabe (valorado en $200) <br>";
+    premios += "3. Una cámara para vigilar a tu mascota cuando no estés en casa (valorada en $70)<br>";
+    premios += "4. Una profilaxis profunda ultrasónica y fluorización ó exfoliación (valorada en $40)<br>";
+    premios += "5. 4 clases de pole dance<br>";
+    premios += "6. 4 clases de heels dance<br>";
+    premios += "7. Sesión fotográfica del ganador y su mascota<br>";
+    premios += "8. Lecciones de violonchelo<br>";
+    premios += "9. Lecciones de guitarra<br>";
+    premios += "10. Una fotografía impresa de El Panecillo y sus alrededores<br>";    
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      header: "Los premios son:",
+      message: premios,
+      rejectLabel: 'Cancelar',
+      rejectButtonProps: {
+        label: 'Cancelar',
+        severity: 'secondary',
+        outlined: true
+      },
+      acceptButtonProps: {
+        label: "Aceptar",
+        severity: 'secondary'
+      }
+    });
+  }
 
   onSubmit() {
     if (this.formulario.invalid) {
@@ -54,10 +86,10 @@ export class HomeComponent {
 
     const cantidad = this.formulario.value.cantidadBoletos!;
     const datosDonante = {
-      nombre: this.formulario.value.nombre!,
+      nombreCompleto: this.formulario.value.nombre!,
       apodo: this.formulario.value.apodo || '',
       email: this.formulario.value.email!,
-      whatsapp: this.formulario.value.whatsapp!
+      celular: this.formulario.value.whatsapp!
     };
 
     this.isLoading = true;
@@ -66,21 +98,22 @@ export class HomeComponent {
     this.rifaService.generaTicketsAleatorios(cantidad).subscribe({
       next: (ticketsResp) => {
         const tickets = ticketsResp.data;
-        
+
         // 2. Crear donante
         this.rifaService.crearDonante(datosDonante).subscribe({
           next: (donanteResp) => {
             const idDonante = donanteResp.idSecuencial;
-            
+
             // 3. Asignar tickets al donante
             this.rifaService.asignarTicketsDonante(idDonante, tickets).subscribe({
               next: () => {
                 this.isLoading = false;
-                this.messageService.add({
+                this.nrosBoletos.set(tickets.join(', '));
+                /*this.messageService.add({
                   severity: 'success',
                   summary: '¡Éxito!',
                   detail: `Se generaron y asignaron ${tickets.length} boletos: ${tickets.join(', ')}. ¡Gracias por ayudar a Tino!`
-                });
+                });*/
                 this.formulario.reset({ cantidadBoletos: 1 });
               },
               error: (err) => {

@@ -3,7 +3,7 @@
   <!-- HEADER -->
   <section class="hero">
     <div class="grid">
-      <div class="col">
+      <div class="col-12 lg:col-4">
         <h1 class="titulo">
           Él es <span>Tino</span>
         </h1>
@@ -11,12 +11,10 @@
           Mi perrito amado ❤️
         </p>
       </div>
-      <div class="col">
-        <div class="col-12 lg:col-4">
-          <div class="foto-container">
-            <div class="corazon">
-              <img src="assets/img/tino.png" alt="Tino">
-            </div>
+      <div class="col-12 lg:col-4">
+        <div class="foto-container">
+          <div class="corazon">
+            <img src="assets/img/tino.png" alt="Tino">
           </div>
         </div>
       </div>
@@ -33,10 +31,10 @@
         <i class="pi pi-heart-fill"></i>
 
         <div>
-          <h3>Tiene cáncer y necesita una cirugía urgente</h3>
+          <h3>Tiene cáncer, su tratamiento tiene costos elevados</h3>
 
           <p>
-            El tumor está en su lengua y corre riesgo de asfixiarse.
+            El tumor está en su lengua y en su linfonodo, el tratamiento es cirugía y electro quimioterapia.
           </p>
         </div>
       </div>
@@ -47,10 +45,11 @@
 
         <div>
           <h3>Estamos haciendo una rifa</h3>
-
           <p>
             Para cubrir los gastos de su operación.
           </p>
+          <p-confirmdialog />
+          <a href="#" (click)="premios($event)">Mira los premios aquí</a>
         </div>
       </div>
 
@@ -59,7 +58,7 @@
         <i class="pi pi-wallet"></i>
 
         <div>
-          <h3>Datos bancarios</h3>
+          <h3>Datos bancarios para compra de boletos y donaciones</h3>
 
           <p>
             Banco Pichincha<br>
@@ -120,6 +119,15 @@
 
           <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
           </p-button>
+
+          @if(nrosBoletos() !== ''){
+          <span>
+            <br>
+            <br>
+            <b>¡Gracias por ayudar a Tino!</b><br>
+            Los números de tus boletos son: {{ nrosBoletos() }}
+          </span>
+          }
 
         </form>
 

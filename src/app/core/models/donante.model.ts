@@ -1,8 +1,8 @@
 export interface Donante {
-  nombre: string;
+  nombreCompleto: string;
   apodo?: string;
   email: string;
-  whatsapp: string;
+  celular: string;
 }
 
 export interface DonanteResponse {

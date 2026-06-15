@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -38,7 +38,8 @@ export class AdminComponent implements OnInit {
   private messageService = inject(MessageService);
   private confirmationService = inject(ConfirmationService);
 
-  tickets: TicketDonante[] = [];
+  //modulos = signal<Modulo[]>([]);
+  tickets = signal<TicketDonante[]>([]);
   loading = false;
   dialogVisible = false;
   selectedTicket: TicketDonante | null = null;
@@ -51,7 +52,7 @@ export class AdminComponent implements OnInit {
     this.loading = true;
     this.rifaService.listarTicketsXDonante().subscribe({
       next: (resp) => {
-        this.tickets = resp.data;
+        this.tickets.set(resp.data);
         this.loading = false;
       },
       error: (err) => {
