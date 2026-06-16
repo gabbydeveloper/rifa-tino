@@ -49,6 +49,7 @@
             <div>
               <h3>Estamos haciendo una rifa</h3>
               <p>Para cubrir los gastos de su operación.</p>
+              <p>Cada boleto tiene un valor de $3</p>
               <p-confirmdialog />
               <a href="#" (click)="premios($event)">Mira los premios aquí</a>
             </div>
@@ -58,10 +59,12 @@
             <i class="pi pi-wallet"></i>
             <div>
               <h3>Datos bancarios</h3>
+              <h4>Para donaciones y compra de boletos:</h4>
               <p>
                 Banco Pichincha<br>
                 Cuenta de Ahorros<br>
                 Nro: 4188986400<br>
+                CI: 1714361647<br>
                 Gabriela Zapata
               </p>
             </div>
@@ -86,30 +89,30 @@
 
           <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
 
-            <div class="field-row">
+            <div class="field">
               <label>Nro. de boletos:</label>
-              <p-inputNumber formControlName="cantidadBoletos" [showButtons]="true">
+              <p-inputNumber formControlName="cantidadBoletos" [showButtons]="true" class="w-full">
               </p-inputNumber>
             </div>
 
-            <div class="field-row">
-              <label>Nombre completo:</label>
-              <input pInputText formControlName="nombre">
+            <div class="field">
+              <label for="nombre">Nombre completo:</label>
+              <input pInputText id="nombre" formControlName="nombre" class="w-full">
             </div>
 
-            <div class="field-row">
-              <label>Apodo:</label>
-              <input pInputText formControlName="apodo">
+            <div class="field">
+              <label for="apodo">Apodo:</label>
+              <input pInputText id="apodo" formControlName="apodo" class="w-full">
             </div>
 
-            <div class="field-row">
-              <label>Email:</label>
-              <input pInputText formControlName="email">
+            <div class="field">
+              <label for="email">Email:</label>
+              <input pInputText id="email" formControlName="email" class="w-full">
             </div>
 
-            <div class="field-row">
-              <label>WhatsApp:</label>
-              <input pInputText formControlName="whatsapp">
+            <div class="field">
+              <label for="whatsapp">WhatsApp:</label>
+              <input pInputText id="whatsapp" formControlName="whatsapp" class="w-full">
             </div>
 
             <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
@@ -120,6 +123,7 @@
           <div class="boletos">
             <span>
               <b>¡Gracias por ayudar a la recuperación de mi Tino!</b><br>
+              <p>Tus boletos quedan reservados, para confirmarlos envía el comprobante de pago al WhatsApp <b>0998104414</b></p>
               {{ nrosBoletos() }}
             </span>
           </div>
