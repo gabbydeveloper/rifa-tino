@@ -1,142 +1,132 @@
 <div class="tino-page">
 
-  <!-- HEADER -->
+  <!-- HERO -->
   <section class="hero">
     <div class="grid">
-      <div class="col-12 lg:col-4">
+
+      <!-- TEXTO HERO -->
+      <div class="col-12 lg:col-6">
         <h1 class="titulo">
           Él es <span>Tino</span>
         </h1>
+
         <p class="subtitulo">
           Mi perrito amado ❤️
         </p>
       </div>
-      <div class="col-12 lg:col-4">
-        <div class="foto-container">
-          <div class="corazon">
-            <img src="assets/img/tino.png" alt="Tino">
+
+      <!-- IMAGEN -->
+      <div class="col-12 lg:col-6 flex justify-content-center">
+        <div class="corazon">
+          <img src="assets/img/tino.png" alt="Tino">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- INFO (siempre debajo del hero) -->
+  <section class="info-section">
+    <div class="grid">
+
+      <div class="col-12 lg:col-8">
+
+        <div class="textos">
+
+          <div class="info-box">
+            <i class="pi pi-heart-fill"></i>
+            <div>
+              <h3>Tiene cáncer, su tratamiento tiene costos elevados</h3>
+              <p>
+                El tumor está en su lengua y en su linfonodo, el tratamiento es cirugía y electro quimioterapia.
+              </p>
+            </div>
           </div>
+
+          <div class="info-box">
+            <i class="pi pi-ticket"></i>
+            <div>
+              <h3>Estamos haciendo una rifa</h3>
+              <p>Para cubrir los gastos de su operación.</p>
+              <p-confirmdialog />
+              <a href="#" (click)="premios($event)">Mira los premios aquí</a>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <i class="pi pi-wallet"></i>
+            <div>
+              <h3>Datos bancarios</h3>
+              <p>
+                Banco Pichincha<br>
+                Cuenta de Ahorros<br>
+                Nro: 4188986400<br>
+                Gabriela Zapata
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FORM -->
+  <section class="form-section">
+    <div class="grid">
+
+      <div class="col-12 lg:col-6">
+
+        <div class="ticket-form">
+          <h2>🎫 Compra de boletos</h2>
+
+          <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+            <div class="field-row">
+              <label>Nro. de boletos:</label>
+              <p-inputNumber formControlName="cantidadBoletos" [showButtons]="true">
+              </p-inputNumber>
+            </div>
+
+            <div class="field-row">
+              <label>Nombre completo:</label>
+              <input pInputText formControlName="nombre">
+            </div>
+
+            <div class="field-row">
+              <label>Apodo:</label>
+              <input pInputText formControlName="apodo">
+            </div>
+
+            <div class="field-row">
+              <label>Email:</label>
+              <input pInputText formControlName="email">
+            </div>
+
+            <div class="field-row">
+              <label>WhatsApp:</label>
+              <input pInputText formControlName="whatsapp">
+            </div>
+
+            <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
+            </p-button>
+          </form>
+          @if(nrosBoletos() !== '')
+          {
+          <div class="boletos">
+            <span>
+              <b>¡Gracias por ayudar a la recuperación de mi Tino!</b><br>
+              {{ nrosBoletos() }}
+            </span>
+          </div>
+          }
         </div>
       </div>
     </div>
   </section>
 
-  <div class="grid">
-
-    <!-- COLUMNA IZQUIERDA -->
-    <div class="col-12 lg:col-5">
-
-      <!-- Historia -->
-      <div class="info-box">
-        <i class="pi pi-heart-fill"></i>
-
-        <div>
-          <h3>Tiene cáncer, su tratamiento tiene costos elevados</h3>
-
-          <p>
-            El tumor está en su lengua y en su linfonodo, el tratamiento es cirugía y electro quimioterapia.
-          </p>
-        </div>
-      </div>
-
-      <!-- Explicación -->
-      <div class="info-box">
-        <i class="pi pi-ticket"></i>
-
-        <div>
-          <h3>Estamos haciendo una rifa</h3>
-          <p>
-            Para cubrir los gastos de su operación.
-          </p>
-          <p-confirmdialog />
-          <a href="#" (click)="premios($event)">Mira los premios aquí</a>
-        </div>
-      </div>
-
-      <!-- Datos bancarios -->
-      <div class="info-box">
-        <i class="pi pi-wallet"></i>
-
-        <div>
-          <h3>Datos bancarios para compra de boletos y donaciones</h3>
-
-          <p>
-            Banco Pichincha<br>
-            Cuenta de Ahorros<br>
-            Nro: 4188986400<br>
-            Gabriela Zapata
-          </p>
-        </div>
-      </div>
-
-      <!-- Formulario -->
-      <div class="ticket-form">
-
-        <h2>🎫 Compra de boletos</h2>
-
-        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
-          <!-- cantidad -->
-
-          <div class="field-row">
-            <label>Nro. de boletos:</label>
-
-            <p-inputNumber formControlName="cantidadBoletos" placeholder="1" [showButtons]="true">
-            </p-inputNumber>
-          </div>
-
-          <!-- nombre -->
-
-          <div class="field-row">
-            <label>Nombre completo:</label>
-
-            <input pInputText formControlName="nombre" placeholder="Pepe Andrade">
-          </div>
-
-          <!-- apodo -->
-
-          <div class="field-row">
-            <label>Apodo (opcional):</label>
-
-            <input pInputText formControlName="apodo" placeholder="pepe">
-          </div>
-
-          <!-- correo -->
-
-          <div class="field-row">
-            <label>Correo electrónico:</label>
-
-            <input pInputText formControlName="email" placeholder="pepe@ayudatino.com">
-          </div>
-
-          <!-- whatsapp -->
-
-          <div class="field-row">
-            <label>WhatsApp:</label>
-
-            <input pInputText formControlName="whatsapp" placeholder="0991234567">
-          </div>
-
-          <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
-          </p-button>
-
-          @if(nrosBoletos() !== ''){
-          <span>
-            <br>
-            <br>
-            <b>¡Gracias por ayudar a Tino!</b><br>
-            Los números de tus boletos son: {{ nrosBoletos() }}
-          </span>
-          }
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </div>
-
 </div>
-
-<p-toast></p-toast>

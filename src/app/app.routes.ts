@@ -4,6 +4,6 @@ import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'admin-tino-panel-secreto', component: AdminComponent },
+  { path: 'admingz', component: AdminComponent },
   { path: '**', redirectTo: '' }
 ];

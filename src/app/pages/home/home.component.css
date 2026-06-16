@@ -4,11 +4,26 @@
   background: #fff8f8;
 }
 
+/* HERO */
+.hero {
+  padding-top: 2rem;
+}
+
+/* INFO */
+.info-section {
+  padding: 1rem 0;
+}
+
+/* FORM */
+.form-section {
+  padding-bottom: 1rem;
+}
+
 /* TITULO */
 
 .titulo {
   text-align: center;
-  font-size: 3rem;
+  font-size: 3.2rem;
   margin-bottom: .5rem;
   color: #5f4a4a;
 }
@@ -19,7 +34,7 @@
 
 .subtitulo {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #ff95b2;
 }
 
@@ -44,7 +59,7 @@
 /* FORMULARIO */
 
 .ticket-form {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   padding: 1.5rem;
   border-radius: 15px;
   background: white;
@@ -88,7 +103,13 @@
 }
 
 .corazon img {
-  width: 70%;
-  height: 70%;
-  object-fit: cover;
+  max-width: 280px;
+  width: 100%;
+}
+
+.boletos {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background-color: #F3B4C3;
+  color: #5f3b3b;
 }

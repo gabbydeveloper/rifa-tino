@@ -48,15 +48,15 @@ export class HomeComponent {
 
   premios(event: Event) {
     let premios = "1. Cocina de inducción, 4 hornillas y horno (valorada en $500) <br>";
-    premios += "2. Traje de danza árabe (valorado en $200) <br>";
+    premios += "2. Hermoso traje de danza árabe (valorado en $200) <br>";
     premios += "3. Una cámara para vigilar a tu mascota cuando no estés en casa (valorada en $70)<br>";
     premios += "4. Una profilaxis profunda ultrasónica y fluorización ó exfoliación (valorada en $40)<br>";
-    premios += "5. 4 clases de pole dance<br>";
-    premios += "6. 4 clases de heels dance<br>";
-    premios += "7. Sesión fotográfica del ganador y su mascota<br>";
-    premios += "8. Lecciones de violonchelo<br>";
-    premios += "9. Lecciones de guitarra<br>";
-    premios += "10. Una fotografía impresa de El Panecillo y sus alrededores<br>";    
+    premios += "5. 4 clases de pole dance (valoradas en $45)<br>";
+    premios += "6. 4 clases de heels dance (valoradas en $45)<br>";
+    premios += "7. Sesión fotográfica del ganador y su mascota (valorada en $70)<br>";
+    premios += "8. Lecciones de violonchelo (valoradas en $50)<br>";
+    premios += "9. Lecciones de guitarra (valoradas en $50)<br>";
+    premios += "10. Una fotografía impresa de El Panecillo y sus alrededores (valorada en $50)<br>";
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       header: "Los premios son:",
@@ -108,13 +108,15 @@ export class HomeComponent {
             this.rifaService.asignarTicketsDonante(idDonante, tickets).subscribe({
               next: () => {
                 this.isLoading = false;
-                this.nrosBoletos.set(tickets.join(', '));
-                /*this.messageService.add({
-                  severity: 'success',
-                  summary: '¡Éxito!',
-                  detail: `Se generaron y asignaron ${tickets.length} boletos: ${tickets.join(', ')}. ¡Gracias por ayudar a Tino!`
-                });*/
+                if (tickets.length === 1) {
+                  this.nrosBoletos.set('El número de tu boleto es el: ' + tickets[0]);
+                } else {
+                  this.nrosBoletos.set('Los números de tus boletos son: ' + tickets.join(', '));
+                }
                 this.formulario.reset({ cantidadBoletos: 1 });
+                /*setTimeout(() => {
+                  this.nrosBoletos.set('');
+                }, 15000);*/
               },
               error: (err) => {
                 this.isLoading = false;

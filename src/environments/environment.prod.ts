@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://codesbygabby.com/rifatino/'
+  apiUrl: 'https://api.codesbygabby.com/'
 };
