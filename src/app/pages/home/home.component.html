@@ -39,7 +39,7 @@
             <div>
               <h3>Tiene cáncer, su tratamiento tiene costos elevados</h3>
               <p>
-                El tumor está en su lengua y en su linfonodo, el tratamiento es cirugía y electro quimioterapia.
+                El tumor está en su lengua y en el linfonodo, el tratamiento es cirugía y electro quimioterapia.
               </p>
             </div>
           </div>
@@ -48,7 +48,7 @@
             <i class="pi pi-ticket"></i>
             <div>
               <h3>Estamos haciendo una rifa</h3>
-              <p>Para cubrir los gastos de su operación.</p>
+              <p>Para cubrir los gastos de su tratamiento.</p>
               <p>Cada boleto tiene un valor de $3</p>
               <p-confirmdialog />
               <a href="#" (click)="premios($event)">Mira los premios aquí</a>
@@ -93,11 +93,17 @@
               <label>Nro. de boletos:</label>
               <p-inputNumber formControlName="cantidadBoletos" [showButtons]="true" class="w-full">
               </p-inputNumber>
+              @if(getErrorMessage('cantidadBoletos') !== ''){
+                <p-message severity="error" size="small" variant="simple">{{ getErrorMessage('cantidadBoletos') }}</p-message>
+              }
             </div>
 
             <div class="field">
               <label for="nombre">Nombre completo:</label>
               <input pInputText id="nombre" formControlName="nombre" class="w-full">
+              @if(getErrorMessage('nombre') !== ''){
+                <p-message severity="error" size="small" variant="simple">{{ getErrorMessage('nombre') }}</p-message>
+              }
             </div>
 
             <div class="field">
@@ -108,11 +114,17 @@
             <div class="field">
               <label for="email">Email:</label>
               <input pInputText id="email" formControlName="email" class="w-full">
+              @if(getErrorMessage('email') !== ''){
+                <p-message severity="error" size="small" variant="simple">{{ getErrorMessage('email') }}</p-message>
+              }
             </div>
 
             <div class="field">
               <label for="whatsapp">WhatsApp:</label>
               <input pInputText id="whatsapp" formControlName="whatsapp" class="w-full">
+              @if(getErrorMessage('whatsapp') !== ''){
+                <p-message severity="error" size="small" variant="simple">{{ getErrorMessage('whatsapp') }}</p-message>
+              }
             </div>
 
             <p-button type="submit" label="Grabar y generar boletos" icon="pi pi-heart" styleClass="w-full">
@@ -123,8 +135,9 @@
           <div class="boletos">
             <span>
               <b>¡Gracias por ayudar a la recuperación de mi Tino!</b><br>
-              <p>Tus boletos quedan reservados, para confirmarlos envía el comprobante de pago al WhatsApp <b>0998104414</b></p>
-              {{ nrosBoletos() }}
+              <p>Tus boletos quedan reservados, para confirmarlos envía el comprobante de pago al WhatsApp <b>0998104414</b>.</p>
+              <p>Una vez confirmado el pago, se te enviarán los números de boletos al correo y al WhatsApp.</p>
+              <b>{{ nrosBoletos() }}</b>
             </span>
           </div>
           }

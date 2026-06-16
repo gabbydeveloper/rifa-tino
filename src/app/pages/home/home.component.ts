@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { RifaService } from '../../core/services/rifa.service';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ import { RifaService } from '../../core/services/rifa.service';
     CardModule,
     ToastModule,
     ProgressSpinnerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    MessageModule
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './home.component.html',
@@ -40,7 +42,7 @@ export class HomeComponent {
 
   formulario = this.fb.group({
     cantidadBoletos: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(6)]],
     apodo: [''],
     email: ['', [Validators.required, Validators.email]],
     whatsapp: ['', [Validators.required, Validators.pattern(/^[0-9+]{8,15}$/)]]
@@ -72,6 +74,35 @@ export class HomeComponent {
         severity: 'secondary'
       }
     });
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.formulario.get(controlName);
+    if (!control || !control.errors || !control.touched) return '';
+
+    const errors = control.errors;
+    switch (controlName) {
+      case 'cantidadBoletos':
+        if (errors['required']) return 'El número de boletos es obligatorio.';
+        if (errors['min']) return 'Debe ser al menos 1 boleto.';
+        if (errors['max']) return 'Máximo 10 boletos.';
+        break;
+      case 'nombre':
+        if (errors['required']) return 'El nombre es obligatorio.';
+        if (errors['minlength']) return `Mínimo ${errors['minlength'].requiredLength} caracteres.`;
+        break;
+      case 'email':
+        if (errors['required']) return 'El email es obligatorio.';
+        if (errors['email']) return 'Formato de email inválido.';
+        break;
+      case 'whatsapp':
+        if (errors['required']) return 'El WhatsApp es obligatorio.';
+        if (errors['pattern']) return 'Solo números y +, entre 8 y 15 caracteres.';
+        break;
+      default:
+        return 'Campo inválido.';
+    }
+    return '';
   }
 
   onSubmit() {
